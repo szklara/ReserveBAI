@@ -1,37 +1,3 @@
-## Welcome to GitHub Pages
+## Witamy w aplikacji Reserve
 
-You can use the [editor on GitHub](https://github.com/szklara/ReserveBAI/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/szklara/ReserveBAI/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+Aplikacja Reserve jest narzędziem które może ułatwiać pracę wielu firmom świadczących usługi z różnych sektorów jak i stanowić wygodę i oszczędność czasu dla klientów. Zadaniem aplikacji jest znaleznienie wolnych terminów na wybraną przez klienta usługę. Klient może wybrać z formularza usługę, która go interesuje, a sprytna aplikacja pokaże mu firmy w danej miejscowości, które (korzystają z aplikacji)taką usługę proponują wraz z ceną oraz listą najbliższych wolnych terminów. Dzięki aplikacji kilienci firm będą mogli zarezerwować wolny termin oraz wystawiać swoje opinie i poznawać opinie innych użytkowników. Na przykład usługi fryzjerskie, kosmetyczne, itp.
