@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "Fryzjerzy",
+    "img": "https://v.wpimg.pl/OTI5ODYyJj1memBybU03YHsMYCB3Dj89JFJhNDVWfm15DHpzbkF6ZGQYd3ZqTn1leAF2az8LNi4jUD1qMwko"
+  },
+  {
+    "id": 2,
+    "name": "Kosmetyczki",
+    "img": "https://img.grouponcdn.com/deal/3AQUWnwoA2SeK5LC1LRL/Rk-960x576/v1/c700x420.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Masażyści",
+    "img": "http://cdn18.poradnikzdrowie.smcloud.net/t/photos/t/53484/masaz-ujedrniajacy_3579889.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Wizażyści",
+    "img": "http://elixirdayspa.pl/wp-content/uploads/2017/10/makijaz_klasyczny-500x375.jpg"
+  }
+]

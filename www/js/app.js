@@ -1,0 +1,219 @@
+function displayServices() {
+
+    $.getJSON("data/services.json", function (data) {
+        var items = [];
+        $.each(data, function (key, val) {
+            items.push("<div class=\"col-lg-4 col-md-6 mb-2\">\n" +
+                "        <div class=\"view\">\n" +
+                "            <a href=\"list.html?service=" + val.id + "&city=" + getActiveCity() + "\">\n" +
+                "            <img src=\"" + val.img + "\" class=\"img-fluid\" alt=\"service logo\">\n" +
+                "            <div class=\"mask flex-center waves-effect waves-light rgba-teal-light\">\n" +
+                "                <p class=\"white-text\">" + val.name + "</p>\n" +
+                "            </div>\n" +
+                "            </a>\n" +
+                "        </div>\n" +
+                "    </div>");
+        });
+
+        $(items.join("")).appendTo("#services");
+    });
+}
+
+function updateCityName() {
+
+    var activeCity = getActiveCity();
+
+    $.getJSON("data/cities.json", function (data) {
+        var items = [];
+        $.each(data, function (key, val) {
+            if (val.id == activeCity) {
+                $('#cityPicker').text(val.name);
+            }
+            items.push('<a class="dropdown-item" href="#" onclick="changeCity(' + val.id + ')">' + val.name + '</a>');
+        });
+        $(items.join("")).appendTo("#cityDropdownList");
+
+    });
+}
+
+function changeCity(id) {
+    window.location.replace(updateURLParameter(window.location.href, 'city', id));
+}
+
+
+function getActiveCity() {
+    var city = findGetParameter('city');
+    return city ? city : 1;
+}
+
+function redirectToMain() {
+    window.location.replace('index.html?city=' + getActiveCity());
+}
+
+
+function getPlaceDetails(place_id, date){
+    var items = [];
+    db.collection("places").doc(place_id).get().then((collection) => {
+        renderPlace([collection].reduce((res, item) => ({...res, [item.id]: item.data()}), {}), date);
+    })
+}
+
+function renderPlace(data, date) {
+    var place =  Object.values(data);
+    var items = [];
+    $.each(place[0].services, function (key, val) {
+        items.push('<tr>\n' +
+            '                <td>'+ val.name +'</td>\n' +
+            '                <td>'+ val.price +' zł</td>\n' +
+            '            </tr>');
+
+    });
+}
+
+
+function findPlaces() {
+    var city = getActiveCity();
+    var date = $('#input_datepicker').val();
+    var time = $('#input_starttime').val();
+    var category_id = findGetParameter('service');
+    var places = {};
+    console.log(city);
+    console.log(category_id);
+
+    if (time === '' || date === '') {
+        alert('Podaj datę oraz czas')
+    } else {
+        // initialize spinner
+        $("#searchResults").html('<i class="fas fa-circle-notch fa-spin"></i>');
+        // https://stackoverflow.com/a/49000491
+        db.collection("places").where("city", "==", city).where("category", "==", category_id).get().then((collection) => {
+            console.log(collection);
+            places = collection.docs.reduce((res, item) => ({...res, [item.id]: item.data()}), {});
+        db.collection("schedules").where("date", "==", date).where("time", "==", time).get().then((collection) => {
+            var schedules = collection.docs.reduce((res, item) => ({...res, [item.id]: item.data()}), {});
+
+            const countPlaces = Object.values(places).length;
+            const countSchedules = Object.values(schedules).length;
+            if(!countSchedules){
+                renderPlaces(places, city, date);
+            }else{
+                Object.keys(places).forEach(function(key,index) {
+                    if(findObjectByKey(Object.values(schedules), 'place_id', key)){
+                        delete places[key];
+                        if(index == countPlaces - 1){
+                           renderPlaces(places, city, date);
+                        }
+                    }
+                });
+            }
+    })
+    })
+    }
+}
+function renderPlaces(places, city, date){
+    if($.isEmptyObject(places)){
+        $("#searchResults").text("Brak wyników wyszukiwania");
+    }else{
+        var items = [];
+        $.each(places, function (key, val) {
+            items.push('<div class="card">\n' +
+                '        <a href="details.html?city='+ city +'&date='+ date +'&place='+ key +'">\n' +
+                '            <!-- Card image -->\n' +
+                '            <img class="card-img-top"\n' +
+                '                 src="'+val.img+'"\n' +
+                '                 alt="Card image cap">\n' +
+                '        </a>\n' +
+                '            <!-- Card content -->\n' +
+                '            <div class="card-body">\n' +
+                '\n' +
+                '                <!-- Title -->\n' +
+                '                <h6 class="card-title"><a class="black-text" href="details.html?city='+ city +'&date='+ date +'&place='+ key +'">'+ val.name +'</a> <span class="grey-text py-2">('+ val.rating +' - ' + val.ratings +' opinii)</span></h6>\n' +
+                '                <!-- Text -->\n' +
+                '                <p class="card-text"><i class="fas fa-map-marker"></i> '+ val.address +'</p>\n' +
+                '                <!-- Button -->\n' +
+                '            </div>\n' +
+                '        </a>\n' +
+                '    </div>');
+        });
+        $("#searchResults").html(items.join(""));
+    }
+}
+
+function initializeDb(){
+    var config = {
+        apiKey: "AIzaSyAoD2MMCoYTLInCLDPz-v6nzX1Eu48_ucM",
+        authDomain: "test-763fe.firebaseapp.com",
+        databaseURL: "https://test-763fe.firebaseio.com",
+        projectId: "test-763fe",
+        storageBucket: "test-763fe.appspot.com",
+        messagingSenderId: "636320382951"
+    };
+    firebase.initializeApp(config);
+    var db = firebase.firestore();
+    return db
+}
+
+
+
+function findObjectByKey(array, key, value) {
+    for (var i = 0; i < array.length; i++) {
+        if (array[i][key] === value) {
+            return array[i];
+        }
+    }
+    return null;
+}
+
+
+// https://stackoverflow.com/a/5448595
+function findGetParameter(parameterName) {
+    var result = null,
+        tmp = [];
+    var items = location.search.substr(1).split("&");
+    for (var index = 0; index < items.length; index++) {
+        tmp = items[index].split("=");
+        if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+    }
+    return result;
+}
+
+// https://stackoverflow.com/a/10997390
+function updateURLParameter(url, param, paramVal) {
+    var TheAnchor = null;
+    var newAdditionalURL = "";
+    var tempArray = url.split("?");
+    var baseURL = tempArray[0];
+    var additionalURL = tempArray[1];
+    var temp = "";
+
+    if (additionalURL) {
+        var tmpAnchor = additionalURL.split("#");
+        var TheParams = tmpAnchor[0];
+        TheAnchor = tmpAnchor[1];
+        if (TheAnchor)
+            additionalURL = TheParams;
+
+        tempArray = additionalURL.split("&");
+
+        for (var i = 0; i < tempArray.length; i++) {
+            if (tempArray[i].split('=')[0] != param) {
+                newAdditionalURL += temp + tempArray[i];
+                temp = "&";
+            }
+        }
+    }
+    else {
+        var tmpAnchor = baseURL.split("#");
+        var TheParams = tmpAnchor[0];
+        TheAnchor = tmpAnchor[1];
+
+        if (TheParams)
+            baseURL = TheParams;
+    }
+
+    if (TheAnchor)
+        paramVal += "#" + TheAnchor;
+
+    var rows_txt = temp + "" + param + "=" + paramVal;
+    return baseURL + "?" + newAdditionalURL + rows_txt;
+}

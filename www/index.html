@@ -6,6 +6,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/mdb.min.css">
+    <link rel="stylesheet" type="text/css" href="css/fontawesome-all.css">
     <link rel="stylesheet" type="text/css" href="css/style.min.css">
 
     <title>Reserve</title>
@@ -13,55 +14,19 @@
 <body>
 <nav class="navbar navbar-dark primary-color">
     <a class="navbar-brand" href="index.html">Reserve</a>
-    <button class="btn btn-outline-white btn-sm my-0" type="submit">Dodaj ogłoszenie</button>
+    <div class="btn-group">
+        <button class="btn btn-outline-white btn-sm my-0" id="cityPicker" type="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">><i class="fas fa-circle-notch fa-spin"></i></button>
+        <div class="dropdown-menu dropdown-menu-right text-center" id="cityDropdownList">
+        </div>
+    </div>
 </nav>
 <div class="container">
     <br/>
-
     <div class="container text-center">
         <h3>Usługi</h3>
     </div>
-    <div class="col-lg-4 col-md-6 mb-2">
-
-        <div class="view">
-            <a href="list.html">
-            <img src="https://v.wpimg.pl/OTI5ODYyJj1memBybU03YHsMYCB3Dj89JFJhNDVWfm15DHpzbkF6ZGQYd3ZqTn1leAF2az8LNi4jUD1qMwko" class="img-fluid" alt="placeholder">
-            <div class="mask flex-center waves-effect waves-light rgba-teal-light">
-                <p class="white-text">Fryzjerzy</p>
-            </div>
-            </a>
-        </div>
-
-    </div>
-    <div class="col-lg-4 col-md-6 mb-2">
-
-        <div class="view">
-            <img src="https://img.grouponcdn.com/deal/3AQUWnwoA2SeK5LC1LRL/Rk-960x576/v1/c700x420.jpg" class="img-fluid" alt="placeholder">
-            <div class="mask flex-center waves-effect waves-light rgba-teal-light">
-                <p class="white-text">Kosmetyczki</p>
-            </div>
-        </div>
-
-    </div>
-    <div class="col-lg-4 col-md-6 mb-2">
-
-        <div class="view">
-            <img src="http://cdn18.poradnikzdrowie.smcloud.net/t/photos/t/53484/masaz-ujedrniajacy_3579889.jpg" class="img-fluid" alt="placeholder">
-            <div class="mask flex-center waves-effect waves-light rgba-teal-light">
-                <p class="white-text">Masażyści</p>
-            </div>
-        </div>
-
-    </div>
-    <div class="col-lg-4 col-md-6 mb-2">
-
-        <div class="view">
-            <img src="http://elixirdayspa.pl/wp-content/uploads/2017/10/makijaz_klasyczny-500x375.jpg" class="img-fluid" alt="placeholder">
-            <div class="mask flex-center waves-effect waves-light rgba-teal-light">
-                <p class="white-text">Wizażyści</p>
-            </div>
-        </div>
-
+    <div id="services">
     </div>
 
 
@@ -69,5 +34,7 @@
 <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/mdb.min.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
 </body>
 </html>

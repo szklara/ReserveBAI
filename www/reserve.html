@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/fontawesome-all.css">
+    <link rel="stylesheet" type="text/css" href="css/mdb.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.min.css">
+    <link rel="stylesheet" type="text/css" href="css/toastr.min.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <title>Reserve</title>
+</head>
+<body>
+<nav class="navbar navbar-dark primary-color">
+    <a class="navbar-brand" href="index.html">Reserve</a>
+    <button class="btn btn-outline-white btn-sm my-0" type="submit">15.05.2018</button>
+</nav>
+<div class="container">
+    <br/>
+
+    <div class="container text-center">
+        <h3>Rezerwuj termin w BE KING</h3>
+    </div>
+    <div class="container">
+
+        <table class="table table-borderless">
+
+            <!--Table head-->
+            <thead>
+            <tr>
+                <th>Godzina</th>
+                <th class="text-center">Akcja</th>
+            </tr>
+            </thead>
+            <!--Table head-->
+            <!--Table body-->
+            <tbody>
+            <tr>
+                <td>10:00</td>
+                <td class="text-center">---</td>
+            </tr>
+            <tr>
+                <td>11:00</td>
+                <td class="td-btn text-center">
+                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalSubscriptionForm">Rezerwuj</button>
+                </td>
+            </tr>
+            <tr>
+                <td>12:00</td>
+                <td class="td-btn text-center">
+                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalSubscriptionForm">Rezerwuj</button>
+                </td>
+            </tr>
+            <tr>
+                <td>13:00</td>
+                <td class="td-btn text-center">
+                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalSubscriptionForm">Rezerwuj</button>
+                </td>
+            </tr>
+            <tr>
+                <td>14:00</td>
+                <td class="text-center">---</td>
+            </tr>
+            <tr>
+                <td>15:00</td>
+                <td class="td-btn text-center">
+                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalSubscriptionForm">Rezerwuj</button>
+                </td>
+            </tr>
+            <tr>
+                <td>16:00</td>
+                <td class="td-btn text-center">
+                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalSubscriptionForm">Rezerwuj</button>
+                </td>
+            </tr>
+            <tr>
+                <td>17:00</td>
+                <td class="td-btn text-center">
+                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalSubscriptionForm">Rezerwuj</button>
+                </td>
+            </tr>
+            <tr>
+                <td>18:00</td>
+                <td class="td-btn text-center">
+                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalSubscriptionForm">Rezerwuj</button>
+                </td>
+            </tr>
+
+            </tbody>
+            <!--Table body-->
+        </table>
+
+        <div class="modal fade" id="modalSubscriptionForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100 font-weight-bold">Rezerwacja</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body mx-3">
+                        <div class="md-form mb-5">
+                            <i class="fa fa-user prefix grey-text"></i>
+                            <input type="text" id="form3" class="form-control validate">
+                            <label data-error="wrong" data-success="right" for="form3">Imie</label>
+                        </div>
+
+                        <div class="md-form mb-4">
+                            <i class="fa fa-envelope prefix grey-text"></i>
+                            <input type="email" id="form2" class="form-control validate">
+                            <label data-error="wrong" data-success="right" for="form2">Email</label>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button class="btn btn-primary">Rezerwuj</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/toastr.min.js"></script>
+
+
+</body>
+</html>
