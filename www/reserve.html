@@ -9,19 +9,21 @@
     <link rel="stylesheet" type="text/css" href="css/mdb.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.min.css">
     <link rel="stylesheet" type="text/css" href="css/toastr.min.css">
+    <link rel="stylesheet" type="text/css" href="css/classic.css">
+    <link rel="stylesheet" type="text/css" href="css/classic.date.css">
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <title>Reserve</title>
 </head>
 <body>
 <nav class="navbar navbar-dark primary-color">
     <a class="navbar-brand" href="index.html">Reserve</a>
-    <button class="btn btn-outline-white btn-sm my-0" type="submit">15.05.2018</button>
+    <button class="btn btn-outline-white btn-sm my-0" type="submit" id="dateButton" data-toggle="modal" data-target="#modalChangeDate"><i class="fas fa-circle-notch fa-spin"></i></button>
 </nav>
 <div class="container">
     <br/>
 
     <div class="container text-center">
-        <h3>Rezerwuj termin w BE KING</h3>
+        <h3>Rezerwuj termin</h3>
     </div>
     <div class="container">
 
@@ -36,63 +38,18 @@
             </thead>
             <!--Table head-->
             <!--Table body-->
-            <tbody>
-            <tr>
-                <td>10:00</td>
-                <td class="text-center">---</td>
-            </tr>
-            <tr>
-                <td>11:00</td>
-                <td class="td-btn text-center">
-                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalSubscriptionForm">Rezerwuj</button>
-                </td>
-            </tr>
-            <tr>
-                <td>12:00</td>
-                <td class="td-btn text-center">
-                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalSubscriptionForm">Rezerwuj</button>
-                </td>
-            </tr>
-            <tr>
-                <td>13:00</td>
-                <td class="td-btn text-center">
-                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalSubscriptionForm">Rezerwuj</button>
-                </td>
-            </tr>
-            <tr>
-                <td>14:00</td>
-                <td class="text-center">---</td>
-            </tr>
-            <tr>
-                <td>15:00</td>
-                <td class="td-btn text-center">
-                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalSubscriptionForm">Rezerwuj</button>
-                </td>
-            </tr>
-            <tr>
-                <td>16:00</td>
-                <td class="td-btn text-center">
-                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalSubscriptionForm">Rezerwuj</button>
-                </td>
-            </tr>
-            <tr>
-                <td>17:00</td>
-                <td class="td-btn text-center">
-                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalSubscriptionForm">Rezerwuj</button>
-                </td>
-            </tr>
-            <tr>
-                <td>18:00</td>
-                <td class="td-btn text-center">
-                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalSubscriptionForm">Rezerwuj</button>
-                </td>
-            </tr>
+            <tbody id="schedule">
+                <tr>
+                    <td colspan="2">
+                        <div class="text-center"><i class="fas fa-circle-notch fa-spin"></i></div>
+                    </td>
+                </tr>
 
             </tbody>
             <!--Table body-->
         </table>
 
-        <div class="modal fade" id="modalSubscriptionForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal fade" id="modalReserve" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header text-center">
@@ -104,19 +61,43 @@
                     <div class="modal-body mx-3">
                         <div class="md-form mb-5">
                             <i class="fa fa-user prefix grey-text"></i>
-                            <input type="text" id="form3" class="form-control validate">
-                            <label data-error="wrong" data-success="right" for="form3">Imie</label>
+                            <input type="text" id="formName" class="form-control validate">
                         </div>
 
                         <div class="md-form mb-4">
                             <i class="fa fa-envelope prefix grey-text"></i>
-                            <input type="email" id="form2" class="form-control validate">
-                            <label data-error="wrong" data-success="right" for="form2">Email</label>
+                            <input type="email" id="formEmail" class="form-control validate">
                         </div>
+                        <input type="hidden" id="formPlaceID"/>
+                        <input type="hidden" id="formDate"/>
+                        <input type="hidden" id="formTime"/>
 
                     </div>
                     <div class="modal-footer d-flex justify-content-center">
-                        <button class="btn btn-primary">Rezerwuj</button>
+                        <button class="btn btn-primary" onclick="reserve()">Rezerwuj</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="modalChangeDate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100 font-weight-bold">Zmiana Daty</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body mx-3">
+                        <div class="md-form mb-5">
+                            <i class="fa fa-calendar prefix grey-text"></i>
+                            <input placeholder="Data" type="text" id="input_datepicker" class="form-control datepicker">
+                        </div>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button class="btn btn-primary" onclick="changeDate()">Zmień</button>
                     </div>
                 </div>
             </div>
@@ -128,7 +109,12 @@
 <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/toastr.min.js"></script>
-
+<script type="text/javascript" src="js/picker.js"></script>
+<script type="text/javascript" src="js/picker.date.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.2/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.2/firebase-firestore.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="js/reserve.js"></script>
 
 </body>
 </html>

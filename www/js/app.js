@@ -39,6 +39,10 @@ function updateCityName() {
 function changeCity(id) {
     window.location.replace(updateURLParameter(window.location.href, 'city', id));
 }
+function changeDate() {
+    var date = $('#input_datepicker').val();
+    window.location.replace(updateURLParameter(window.location.href, 'date', date));
+}
 
 
 function getActiveCity() {
@@ -50,17 +54,115 @@ function redirectToMain() {
     window.location.replace('index.html?city=' + getActiveCity());
 }
 
+function showReserveModal(place_id, date, time){
+    $('#formPlaceID').val(place_id);
+    $('#formDate').val(date);
+    $('#formTime').val(time);
+    $('#modalReserve').modal('show');
+}
+
+function getPlaceSchedule(place_id, date){
+    db.collection("schedules").where("date", "==", date).where("place_id", "==", place_id).get().then((collection) => {
+        renderSchedule(collection.docs.reduce((res, item) => ({...res, [item.id]: item.data()}), {}), date, place_id);
+    })
+}
+
+function reserve(){
+    var place_id =  $('#formPlaceID').val();
+    var date =  $('#formDate').val();
+    var time =  $('#formTime').val();
+    var name =  $('#formName').val();
+    var email =  $('#formEmail').val();
+    if (name === '' || email === '') {
+        alert('Podaj imię oraz nazwisko')
+    } else {
+        db.collection("schedules").add({
+            date: date,
+            time: time,
+            place_id: place_id,
+            name: name,
+            email: email
+        })
+            .then(function (docRef) {
+                alert("Sukces!");
+                console.log("Document written with ID: ", docRef.id);
+            })
+            .catch(function (error) {
+                alert("Error adding document: "+ error);
+            });
+    }
+}
+
+function renderSchedule(data, date, place_id) {
+    var key = Object.keys(data);
+    var results = Object.values(data);
+    var i;
+    var items = [];
+
+    for(i=8; i<=20; i++) {
+        var prefix = '';
+        if(i < 10){
+           prefix = '0'
+        }
+        if(findObjectByKey(results, 'time', prefix+i+':00')){
+            items.push('<tr>\n' +
+                '                <td>'+prefix+i+':00</td>\n' +
+                '                <td class="text-center">---</td>\n' +
+                '            </tr>')
+        }else{
+            items.push('<tr>\n' +
+                '                <td>'+ prefix+i+':00</td>\n' +
+                '                <td class="td-btn text-center">\n' +
+                '                    <button type="button" class="btn btn-sm btn-primary" onclick="showReserveModal(\''+place_id+'\', \''+ date +'\', \''+ prefix+i+':00\')">Rezerwuj</button>\n' +
+                '                </td>\n' +
+                '            </tr>')
+        }
+    }
+    $("#schedule").html(items.join(""));
+
+
+}
 
 function getPlaceDetails(place_id, date){
-    var items = [];
     db.collection("places").doc(place_id).get().then((collection) => {
         renderPlace([collection].reduce((res, item) => ({...res, [item.id]: item.data()}), {}), date);
     })
 }
 
 function renderPlace(data, date) {
+    var key = Object.keys(data);
     var place =  Object.values(data);
     var items = [];
+
+    items.push('<div class="container text-center">\n' +
+        '        <h3>'+ place[0].name + '</h3>\n' +
+        '       <h6 class="grey-text py-2">'+ place[0].rating +' - '+ place[0].votes +' opinii</h6>\n' +
+        '        <p><i class="fas fa-map-marker"></i> '+ place[0].address+'</p>\n' +
+        '    </div>\n' +
+        '    <div class="view">\n' +
+        '        <img src="'+ place[0].img +'"\n' +
+        '             class="img-fluid" alt="placeholder">\n' +
+        '    </div>\n' +
+        '\n' +
+        '    <div class="container text-center">\n' +
+        '\n' +
+        '        <hr/>\n' +
+        '        <h5>Usługi</h5>\n' +
+        '        <hr/>\n' +
+        '\n' +
+        '        <table class="table">\n' +
+        '\n' +
+        '            <!--Table head-->\n' +
+        '            <thead>\n' +
+        '            <tr>\n' +
+        '                <th>Nazwa</th>\n' +
+        '                <th>Cena</th>\n' +
+        '            </tr>\n' +
+        '            </thead>\n' +
+        '            <!--Table head-->\n' +
+        '            <!--Table body-->\n' +
+        '            <tbody>');
+
     $.each(place[0].services, function (key, val) {
         items.push('<tr>\n' +
             '                <td>'+ val.name +'</td>\n' +
@@ -68,6 +170,12 @@ function renderPlace(data, date) {
             '            </tr>');
 
     });
+
+    items.push('</tbody>\n' +
+        '        </table>\n' +
+        '        <a href="reserve.html?place='+ key[0] +'&date='+date+'"><button type="button" class="btn btn-primary">Rezerwuj</button></a> </div>');
+
+    $("#placeDetails").html(items.join(""));
 }
 
 
@@ -77,8 +185,6 @@ function findPlaces() {
     var time = $('#input_starttime').val();
     var category_id = findGetParameter('service');
     var places = {};
-    console.log(city);
-    console.log(category_id);
 
     if (time === '' || date === '') {
         alert('Podaj datę oraz czas')
@@ -87,7 +193,6 @@ function findPlaces() {
         $("#searchResults").html('<i class="fas fa-circle-notch fa-spin"></i>');
         // https://stackoverflow.com/a/49000491
         db.collection("places").where("city", "==", city).where("category", "==", category_id).get().then((collection) => {
-            console.log(collection);
             places = collection.docs.reduce((res, item) => ({...res, [item.id]: item.data()}), {});
         db.collection("schedules").where("date", "==", date).where("time", "==", time).get().then((collection) => {
             var schedules = collection.docs.reduce((res, item) => ({...res, [item.id]: item.data()}), {});
@@ -127,7 +232,7 @@ function renderPlaces(places, city, date){
                 '            <div class="card-body">\n' +
                 '\n' +
                 '                <!-- Title -->\n' +
-                '                <h6 class="card-title"><a class="black-text" href="details.html?city='+ city +'&date='+ date +'&place='+ key +'">'+ val.name +'</a> <span class="grey-text py-2">('+ val.rating +' - ' + val.ratings +' opinii)</span></h6>\n' +
+                '                <h6 class="card-title"><a class="black-text" href="details.html?city='+ city +'&date='+ date +'&place='+ key +'">'+ val.name +'</a> <span class="grey-text py-2">('+ val.rating +' - ' + val.votes +' opinii)</span></h6>\n' +
                 '                <!-- Text -->\n' +
                 '                <p class="card-text"><i class="fas fa-map-marker"></i> '+ val.address +'</p>\n' +
                 '                <!-- Button -->\n' +
@@ -141,12 +246,12 @@ function renderPlaces(places, city, date){
 
 function initializeDb(){
     var config = {
-        apiKey: "AIzaSyAoD2MMCoYTLInCLDPz-v6nzX1Eu48_ucM",
-        authDomain: "test-763fe.firebaseapp.com",
-        databaseURL: "https://test-763fe.firebaseio.com",
-        projectId: "test-763fe",
-        storageBucket: "test-763fe.appspot.com",
-        messagingSenderId: "636320382951"
+        apiKey: "AIzaSyBS87PlmLxHd0Quw29nvfGFdqftw72fcnI",
+        authDomain: "moj-niesamowity-projekt-3c989.firebaseapp.com",
+        databaseURL: "https://moj-niesamowity-projekt-3c989.firebaseio.com",
+        projectId: "moj-niesamowity-projekt-3c989",
+        storageBucket: "moj-niesamowity-projekt-3c989.appspot.com",
+        messagingSenderId: "322177020460"
     };
     firebase.initializeApp(config);
     var db = firebase.firestore();
