@@ -54,6 +54,39 @@ function redirectToMain() {
     window.location.replace('index.html?city=' + getActiveCity());
 }
 
+function ratePlace(){
+    var place_id = $('#formPlaceID').val();
+    var rating = $('#formRating').val();
+    if(rating > 5 || rating < 1){
+        alert('Wybierz ocenę z przedziału od 1 do 5');
+        return false;
+    }
+    var placeRef = db.collection('places').doc(place_id);
+     placeRef.get().then((collection) => {
+        place = Object.values([collection].reduce((res, item) => ({...res, [item.id]: item.data()}), {}));
+        var new_rating = ((place[0].rating*place[0].votes)+ parseInt(rating)) / (place[0].votes + 1);
+        placeRef.set({
+            rating: new_rating,
+            votes: place[0].votes + 1
+        }, {merge: true}).then(function() {
+            alert('Ocena została dodana');
+            location.reload();
+
+        })
+    })
+
+}
+
+
+
+function showRateModal(){
+    var place_id = findGetParameter('place');
+    $('#formPlaceID').val(place_id);
+    $('#modalRate').modal('show');
+}
+
+
+
 function showReserveModal(place_id, date, time){
     $('#formPlaceID').val(place_id);
     $('#formDate').val(date);
@@ -84,11 +117,12 @@ function reserve(){
             email: email
         })
             .then(function (docRef) {
-                alert("Sukces!");
+                alert('Dokonano rezerwacji');
                 console.log("Document written with ID: ", docRef.id);
+                location.reload();
             })
             .catch(function (error) {
-                alert("Error adding document: "+ error);
+                alert("Błąd podczas dodawania rezerwacji");
             });
     }
 }
@@ -136,7 +170,7 @@ function renderPlace(data, date) {
 
     items.push('<div class="container text-center">\n' +
         '        <h3>'+ place[0].name + '</h3>\n' +
-        '       <h6 class="grey-text py-2">'+ place[0].rating +' - '+ place[0].votes +' opinii</h6>\n' +
+        '       <h6 class="grey-text py-2">'+ parseFloat(place[0].rating).toFixed(1) +' - '+ place[0].votes +' opinii</h6>\n' +
         '        <p><i class="fas fa-map-marker"></i> '+ place[0].address+'</p>\n' +
         '    </div>\n' +
         '    <div class="view">\n' +
@@ -232,7 +266,7 @@ function renderPlaces(places, city, date){
                 '            <div class="card-body">\n' +
                 '\n' +
                 '                <!-- Title -->\n' +
-                '                <h6 class="card-title"><a class="black-text" href="details.html?city='+ city +'&date='+ date +'&place='+ key +'">'+ val.name +'</a> <span class="grey-text py-2">('+ val.rating +' - ' + val.votes +' opinii)</span></h6>\n' +
+                '                <h6 class="card-title"><a class="black-text" href="details.html?city='+ city +'&date='+ date +'&place='+ key +'">'+ val.name +'</a> <span class="grey-text py-2">('+  parseFloat(val.rating).toFixed(1) +' - ' + val.votes +' opinii)</span></h6>\n' +
                 '                <!-- Text -->\n' +
                 '                <p class="card-text"><i class="fas fa-map-marker"></i> '+ val.address +'</p>\n' +
                 '                <!-- Button -->\n' +
