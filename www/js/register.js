@@ -1,6 +1,6 @@
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
-    // User is signed in.
+    // Uzytkownik zalogowany.
 
     document.getElementById("alreadysigned_div").style.display = "block";
     document.getElementById("signup_div").style.display = "none";
@@ -10,12 +10,12 @@ firebase.auth().onAuthStateChanged(function(user) {
     if(user != null){
 
       var email_id = user.email;
-      document.getElementById("user_para").innerHTML = "Welcome User : " + email_id;
+      document.getElementById("user_para").innerHTML = "Witaj : " + email_id;
 
     }
 
   } else {
-    // No user is signed in.
+    // Niezalogowany.
 
     document.getElementById("alreadysigned_div").style.display = "none";
     document.getElementById("signup_div").style.display = "block";
@@ -32,7 +32,7 @@ function register(){
 	var registerPass = document.getElementById("password_register").value;
 	
 firebase.auth().createUserWithEmailAndPassword(registerEmail, registerPass).catch(function(error) {
-  // Handle Errors here.
+  // Errors.
   var errorCode = error.code;
   var errorMessage = error.message;
   // ...
