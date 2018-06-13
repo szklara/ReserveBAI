@@ -1,18 +1,17 @@
 ## Witamy w aplikacji Reserve
 <html>
  <head>
- </head
    
  <body align="center">
   
  <h2>Spis treści</h2>
- <ol>
+ <ol align="center">
 	<li>Opis
 	<li>Główne funkcjonalności
 	<li>Prototyp aplikacji
 	<li>Linki
 	<li>Zespół projektowy
-</ol>
+
 <hr />
 		
 <h2>Opis</h2>
@@ -20,14 +19,14 @@
 <hr />
 
 <h2>Główne funkcjonalności</h2>
-	<ul>
+	<ul align="center">
 	<li>Wybór miasta
 	<li>Wybór usługi
 	<li>Wyszukiwanie przy pomocy daty i godziny
 	<li>Rezerwacja danego terminu za pomocą ID i e-mail
 	<li>Informacje na temat cen
 	<li>Dodawanie ocen
-	</ul>
+	
 	
 <h2>Prototyp aplikacji</h2>
 
