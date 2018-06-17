@@ -34,7 +34,8 @@
 <img src="https://raw.githubusercontent.com/szklara/ReserveBAI/master/www/img/Prototyp/obrazek2.jpg" height="500" width="320" align="right">
 <img src="https://raw.githubusercontent.com/szklara/ReserveBAI/master/www/img/Prototyp/obrazek3.jpg" height="500" width="320" align="left">
 <img src="https://raw.githubusercontent.com/szklara/ReserveBAI/master/www/img/Prototyp/obrazek4.jpg" height="500" width="320" align="right">
-<img src="https://raw.githubusercontent.com/szklara/ReserveBAI/master/www/img/Prototyp/obrazek5.jpg" height="500" width="320" align="middle">
+<img src="https://raw.githubusercontent.com/szklara/ReserveBAI/master/www/img/Prototyp/obrazek5.jpg" height="500" width="320" align="left">
+<img src="https://raw.githubusercontent.com/szklara/ReserveBAI/master/www/img/Prototyp/obrazek6.jpg" height="500" width="320" align="right">
 	
 <hr />
 <h2>Linki</h2>
