@@ -1,3 +1,13 @@
+function doLogin() {  
+    window.location.href = 'index.html';
+  var email = $('#username').val();
+  var password = $('#password').val();
+  firebase.auth().signInWithEmailAndPassword(email, password).then(function(response) {
+  
+  }).catch(function (error) {
+    console.log(error);
+  });
+}
 function displayServices() {
 
     $.getJSON("data/services.json", function (data) {
@@ -18,15 +28,7 @@ function displayServices() {
         $(items.join("")).appendTo("#services");
     });
 }
-function doLogin() {
-  var email = $('#username').val();
-  var password = $('#password').val();
-  firebase.auth().signInWithEmailAndPassword(email, password).then(function(response) {
-    window.location.href = 'index.html';
-  }).catch(function (error) {
-    console.log(error);
-  });
-}
+
 function updateCityName() {
 
     var activeCity = getActiveCity();
