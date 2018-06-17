@@ -27,17 +27,17 @@
 	<li>Informacje na temat cen
 	<li>Dodawanie ocen
 	
-	
+<hr />	
 <h2>Prototyp aplikacji</h2>
 
 <img src="https://raw.githubusercontent.com/szklara/ReserveBAI/master/www/img/Prototyp/obrazek1.jpg" align="left">
+<hr />
 <img src="https://raw.githubusercontent.com/szklara/ReserveBAI/master/www/img/Prototyp/obrazek2.jpg" align="right">
-<br />
-<br />
+<hr />
 <img src="https://raw.githubusercontent.com/szklara/ReserveBAI/master/www/img/Prototyp/obrazek3.jpg" align="left">
+<hr />
 <img src="https://raw.githubusercontent.com/szklara/ReserveBAI/master/www/img/Prototyp/obrazek4.jpg" align="right">
-<br />
-<br />
+<hr />
 <img src="https://raw.githubusercontent.com/szklara/ReserveBAI/master/www/img/Prototyp/obrazek5.jpg" align="middle">
 	
 <hr />
