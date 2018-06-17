@@ -1,5 +1,14 @@
 function doLogin() {  
     window.location.replace = 'index.html';
+    function doLogin() {
+  var email = $('#username').val();
+  var password = $('#password').val();
+  firebase.auth().signInWithEmailAndPassword(email, password).then(function(response) {
+    window.location.href = 'index.html';
+  }).catch(function (error) {
+    console.log(error);
+  });
+}
 
 }
 function displayServices() {
