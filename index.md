@@ -30,13 +30,15 @@
 	
 <h2>Prototyp aplikacji</h2>
 
-<img src="https://raw.githubusercontent.com/szklara/ReserveBAI/master/www/img/Prototyp/obrazek1.jpg">
-<img src="https://raw.githubusercontent.com/szklara/ReserveBAI/master/www/img/Prototyp/obrazek2.jpg">
+<img src="https://raw.githubusercontent.com/szklara/ReserveBAI/master/www/img/Prototyp/obrazek1.jpg" align="left">
+<img src="https://raw.githubusercontent.com/szklara/ReserveBAI/master/www/img/Prototyp/obrazek2.jpg" align="right">
 <br />
-<img src="https://raw.githubusercontent.com/szklara/ReserveBAI/master/www/img/Prototyp/obrazek3.jpg">
-<img src="https://raw.githubusercontent.com/szklara/ReserveBAI/master/www/img/Prototyp/obrazek4.jpg">
 <br />
-<img src="https://raw.githubusercontent.com/szklara/ReserveBAI/master/www/img/Prototyp/obrazek5.jpg">
+<img src="https://raw.githubusercontent.com/szklara/ReserveBAI/master/www/img/Prototyp/obrazek3.jpg" align="left">
+<img src="https://raw.githubusercontent.com/szklara/ReserveBAI/master/www/img/Prototyp/obrazek4.jpg" align="right">
+<br />
+<br />
+<img src="https://raw.githubusercontent.com/szklara/ReserveBAI/master/www/img/Prototyp/obrazek5.jpg" align="middle">
 	
 <hr />
 <h2>Linki</h2>
