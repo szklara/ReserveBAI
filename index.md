@@ -5,7 +5,7 @@
  <body align="center">
   
  <h2>Spis treści</h2>
- <ol align="center">
+ <ol style="text-align:center">
 	<li>Opis
 	<li>Główne funkcjonalności
 	<li>Prototyp aplikacji
@@ -34,20 +34,19 @@
 	
 	
 	
-	
+
 <hr />
 <h2>Linki</h2>
 	<a href="https://trello.com/aplikacjabai/members">Trello </a>
 	<br />
 	<a href="https://github.com/szklara/ReserveBAI.git">Repozytorium GitHub</a>
 	<br />
+	<a href="https://projects.invisionapp.com/share/J6KL9OQMVBN#/screens/302224017_0a">Prototyp aplikacji</a>
+	
 <hr />
 <h2>Zespół projektowy</h2>
 
-Michał Szklarczyk - 188382</br>
-Alicja Lada - 187169</br>
-Klaudia Soja - 188197</br>
+Michał Szklarczyk - 188382 <br />
+Alicja Lada - 187169 <br />
+Klaudia Soja - 188197 <br />
 Mateusz Ruszało - 188016
-
-</body>
-</html>
