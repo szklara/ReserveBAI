@@ -1,5 +1,5 @@
 function doLogin() {  
-    window.location.href = 'index.html';
+    window.location.replace = 'index.html';
 
 }
 function displayServices() {
