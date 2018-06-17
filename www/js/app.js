@@ -1,12 +1,6 @@
 function doLogin() {  
     window.location.href = 'index.html';
-  var email = $('#username').val();
-  var password = $('#password').val();
-  firebase.auth().signInWithEmailAndPassword(email, password).then(function(response) {
-  
-  }).catch(function (error) {
-    console.log(error);
-  });
+
 }
 function displayServices() {
 
