@@ -30,11 +30,14 @@
 	
 <h2>Prototyp aplikacji</h2>
 
+<img src="../www/img/Prototyp/obrazek1.jpg />
+<img src="../www/img/Prototyp/obrazek2.jpg />
+<br />
+<img src="../www/img/Prototyp/obrazek3.jpg />
+<img src="../www/img/Prototyp/obrazek4.jpg />
+<br />
+<img src="../www/img/Prototyp/obrazek5.jpg />
 	
-	
-	
-	
-
 <hr />
 <h2>Linki</h2>
 	<a href="https://trello.com/aplikacjabai/members">Trello </a>
