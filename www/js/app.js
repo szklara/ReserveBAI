@@ -28,6 +28,16 @@ function doLogin() {
   });
 }
 
+function doLogin() {
+  var email = $('#username').val();
+  var password = $('#password').val();
+  firebase.auth().signInWithEmailAndPassword(email, password).then(function(response) {
+    window.location.href = 'index.html';
+  }).catch(function (error) {
+    console.log(error);
+  });
+}
+
 function updateCityName() {
 
     var activeCity = getActiveCity();
