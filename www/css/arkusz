@@ -1,0 +1,27 @@
+.center {width: 0px; margin: 0 auto; margin-top: 300px;}		
+
+.panel1 {
+   background: #3cb0fd;
+   animation-name: moja_animacja;
+   animation-duration: 20s;
+   animation-iteration-count: infinite;
+}
+    
+@keyframes moja_animacja {
+   0% {background: #3cb0fd;}
+   50% {background: #15eb8b;}    
+}
+#panel {
+margin-top: 100px;
+	width: 300px; 
+	margin: 0 auto; 
+	padding: 0; 
+	background: #fff;
+	border: 1px solid silver;
+	font: 16px calibri;
+	letter-spacing: -1px;
+	padding: 15px 0 0;
+	-webkit-box-shadow: 0 0 2px silver; 
+    -moz-box-shadow: 0 0 2px silver; 
+    box-shadow: 0 0 2px silver; 
+}
