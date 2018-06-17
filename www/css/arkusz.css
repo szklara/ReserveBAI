@@ -12,9 +12,9 @@
    50% {background: #15eb8b;}    
 }
 #panel {
-margin-top: 100px;
+
 	width: 300px; 
-	margin: 0 auto; 
+	margin: 100px auto; 
 	padding: 0; 
 	background: #fff;
 	border: 1px solid silver;
